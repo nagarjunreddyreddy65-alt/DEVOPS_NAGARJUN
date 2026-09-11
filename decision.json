@@ -1,0 +1,32 @@
+{
+  "action": "FULL_PIPELINE",
+  "failure_probability": 0.2345,
+  "model_confidence": 0.7655,
+  "predicted_runtime_sec": 1.13,
+  "safety_fallback_triggered": true,
+  "reason": "Model confidence 0.77 < threshold 0.90 (Uncertainty fallback).",
+  "timestamp": 1789113651.4942276,
+  "context": {
+    "commit_id": "sim_1789113651",
+    "files_changed": 1
+  },
+  "selected_tests": [
+    "tests/test_auth.py",
+    "tests/test_payment.py",
+    "tests/test_reporting.py",
+    "tests/test_database.py"
+  ],
+  "is_full_suite": true,
+  "test_selection_reason": "Full suite forced or no specific change files detected",
+  "features": {
+    "commit_id": "sim_1789113651",
+    "files_changed": 1,
+    "lines_added": 30,
+    "lines_deleted": 5,
+    "test_count": 27,
+    "previous_runtime_sec": 1.134,
+    "previous_failure": 0,
+    "cpu_usage_pct": 5.6,
+    "memory_usage_mb": 146.80859375
+  }
+}

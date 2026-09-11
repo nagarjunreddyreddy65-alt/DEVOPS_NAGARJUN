@@ -1,0 +1,18 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Data & SQLite locks (track sample CSVs but ignore temporary caches)
+*.sqlite3-journal
+*.db-journal
+
+# OS files
+.DS_Store
+Thumbs.db

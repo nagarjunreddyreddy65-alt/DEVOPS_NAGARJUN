@@ -1,0 +1,7 @@
+Metric,Conventional,AI Optimized,Change
+Average runtime (sec),1.32,0.96,-26.9%
+Tests executed,24.0,15.8,-34.0%
+CPU usage (%),34.0%,28.7%,-15.7%
+Memory (MB),223.1,204.1,-8.5%
+Failure rate (%),0.0%,0.0%,+0.0%
+Deployment success (%),100.0%,100.0%,0.0% (parity)

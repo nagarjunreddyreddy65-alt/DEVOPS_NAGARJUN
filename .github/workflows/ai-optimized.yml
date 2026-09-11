@@ -1,0 +1,71 @@
+name: ai-optimized-ci
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  ai-decision-and-execution:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository with History
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Extract Changed Files
+        id: git-diff
+        run: |
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | tr '\n' ' ')
+          echo "files=${CHANGED_FILES}" >> "$GITHUB_OUTPUT"
+          echo "Detected changed files: ${CHANGED_FILES}"
+
+      - name: Execute Autonomous AI Decision Engine
+        id: ai-engine
+        run: |
+          python src/predict.py --changed-files ${{ steps.git-diff.outputs.files }} --output decision.json
+          ACTION=$(python -c "import json; print(json.load(open('decision.json'))['action'])")
+          SELECTED=$(python -c "import json; print(' '.join(json.load(open('decision.json'))['selected_tests']))")
+          IS_FULL=$(python -c "import json; print(str(json.load(open('decision.json'))['is_full_suite']).lower())")
+          echo "action=${ACTION}" >> "$GITHUB_OUTPUT"
+          echo "selected_tests=${SELECTED}" >> "$GITHUB_OUTPUT"
+          echo "is_full_suite=${IS_FULL}" >> "$GITHUB_OUTPUT"
+
+      - name: Run Full Pipeline (High-Risk or Low-Confidence Fallback)
+        if: steps.ai-engine.outputs.action == 'FULL_PIPELINE'
+        run: |
+          echo "Executing FULL PIPELINE fallback..."
+          pytest -q tests/
+
+      - name: Run AI-Optimized Test Suite (Change-Aware Dynamic Selection)
+        if: steps.ai-engine.outputs.action == 'OPTIMIZE_TESTS'
+        run: |
+          echo "Executing OPTIMIZED change-aware test subset: ${{ steps.ai-engine.outputs.selected_tests }}"
+          pytest -q ${{ steps.ai-engine.outputs.selected_tests }}
+
+      - name: Run Standard Pipeline
+        if: steps.ai-engine.outputs.action == 'STANDARD_PIPELINE'
+        run: |
+          echo "Executing STANDARD PIPELINE suite..."
+          pytest -q tests/
+
+      - name: Upload Decision Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ai-pipeline-decision
+          path: decision.json

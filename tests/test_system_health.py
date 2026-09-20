@@ -10,7 +10,7 @@ def test_dashboard_html_status(client):
     response = client.get("/")
     assert response.status_code == 200
     assert "Autonomous DevOps" in response.text
-    assert "System Status" in response.text
+    assert "AI Decision Engine Online" in response.text
 
 def test_dashboard_telemetry_endpoint(client):
     response = client.get("/telemetry")

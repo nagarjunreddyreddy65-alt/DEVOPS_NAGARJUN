@@ -1,13 +1,13 @@
 {
   "action": "OPTIMIZE_TESTS",
-  "failure_probability": 0.2067,
-  "model_confidence": 0.7933,
+  "failure_probability": 0.2751,
+  "model_confidence": 0.7249,
   "predicted_runtime_sec": 1.13,
   "safety_fallback_triggered": false,
   "reason": "Predicted runtime 1.1s >= threshold 0.6s, safe to optimize.",
-  "timestamp": 1789115634.5843425,
+  "timestamp": 1789903583.6923125,
   "context": {
-    "commit_id": "bf6efd5",
+    "commit_id": "b7aef8e",
     "files_changed": 1
   },
   "selected_tests": [
@@ -16,14 +16,14 @@
   "is_full_suite": false,
   "test_selection_reason": "Change-aware mapping for modules: payment",
   "features": {
-    "commit_id": "bf6efd5",
+    "commit_id": "b7aef8e",
     "files_changed": 1,
     "lines_added": 25,
     "lines_deleted": 3,
-    "test_count": 30,
-    "previous_runtime_sec": 1.134,
+    "test_count": 37,
+    "previous_runtime_sec": 1.111,
     "previous_failure": 0,
-    "cpu_usage_pct": 22.2,
-    "memory_usage_mb": 173.43359375
+    "cpu_usage_pct": 44.7,
+    "memory_usage_mb": 185.2734375
   }
 }

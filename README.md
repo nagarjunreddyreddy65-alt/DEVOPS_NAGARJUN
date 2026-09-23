@@ -262,10 +262,16 @@ Access the interactive web UI at `http://localhost:8000`.
 
 ---
 
-## 8. IEEE Research Paper
-The complete research paper is provided in two formats:
+## 8. IEEE Research Paper & Project Report
+The complete research paper and comprehensive academic project report are provided:
+- **`Autonomous_DevOps_Detailed_Project_Report.pdf`**: Complete, publication-quality Master of Computer Applications (MCA) Project Report in PDF format with cover page, certificates, architecture diagrams, embedded figures, and metric benchmarks.
 - **`paper/IEEE_PAPER.md`**: Publication-ready Markdown paper with full literature review matrix, math equations, architecture diagrams, and analysis.
 - **`paper/autonomous_devops_ieee.tex`**: Standard IEEEtran 2-column LaTeX source with BibTeX citations in `paper/references.bib`.
+
+### Regenerate PDF Project Report
+```bash
+python src/generate_pdf_report.py
+```
 
 ---
 
